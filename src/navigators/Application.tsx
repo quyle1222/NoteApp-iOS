@@ -5,11 +5,12 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import { Startup } from '../screens';
+import { Home, Startup } from '../screens';
 import { useTheme } from '../hooks';
 import MainNavigator from './Main';
 import { useFlipper } from '@react-navigation/devtools';
 import { ApplicationStackParamList } from '../../@types/navigation';
+import { CONST } from '@/utils';
 
 const Stack = createStackNavigator<ApplicationStackParamList>();
 
@@ -27,8 +28,9 @@ const ApplicationNavigator = () => {
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Startup" component={Startup} />
-          <Stack.Screen name="Main" component={MainNavigator} />
+          <Stack.Screen name={CONST.STARTUP} component={Startup} />
+          <Stack.Screen name={CONST.MAIN} component={MainNavigator} />
+          <Stack.Screen name={CONST.HOME} component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
