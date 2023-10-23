@@ -4,14 +4,14 @@ import { View, Text, StyleSheet, ViewProps } from 'react-native';
 
 const AppHeader = ({
   title,
-  leftComponent,
-  rightComponent,
+  leftComponent = null,
+  rightComponent = null,
   ...props
 }: {
   title: String;
-  leftComponent: View;
-  rightComponent: View;
-  props: ViewProps;
+  leftComponent: View | null;
+  rightComponent: View | null;
+  props: ViewProps | null;
 }) => {
   const { Fonts, Layout, MetricsSizes } = useTheme();
 
@@ -19,7 +19,9 @@ const AppHeader = ({
     <View style={[Layout.fill, style.containerHeight]} {...props}>
       {leftComponent}
       {title && (
-        <Text style={[Fonts.textCenter, Fonts.textPrimary]}>{title}</Text>
+        <Text style={[Layout.fill, Fonts.textCenter, Fonts.textPrimary]}>
+          {title}
+        </Text>
       )}
       {rightComponent}
     </View>
@@ -28,6 +30,7 @@ const AppHeader = ({
 
 const style = StyleSheet.create({
   containerHeight: {
+    flexDirection: 'row',
     height: 80,
   },
 });
