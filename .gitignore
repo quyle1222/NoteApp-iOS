@@ -2435,3 +2435,4 @@ vendor/cache/ruby/3.0.0/specifications/xcodeproj-1.22.0.gemspec
 ios/Podfile.lock
 @types/navigation.d.ts
 .bundle/config
+.gitignore
