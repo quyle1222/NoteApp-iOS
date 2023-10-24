@@ -1,5 +1,5 @@
 import { useTheme } from '@/hooks';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { View, Text, StyleSheet, ViewProps } from 'react-native';
 
 const AppHeader = ({
@@ -9,8 +9,8 @@ const AppHeader = ({
   ...props
 }: {
   title: String;
-  leftComponent: View | null;
-  rightComponent: View | null;
+  leftComponent: FunctionComponent | null;
+  rightComponent: FunctionComponent | null;
   props: ViewProps | null;
 }) => {
   const { Fonts, Layout, MetricsSizes } = useTheme();

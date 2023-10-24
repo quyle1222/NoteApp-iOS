@@ -1,7 +1,8 @@
 import AppHeader from '@/components/AppHeader/AppHeader';
 import { useTheme } from '@/hooks';
-import React, { useState } from 'react';
+import React, { useState, Component, FunctionComponent } from 'react';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Home = () => {
   const title = 'Home';
@@ -12,8 +13,12 @@ const Home = () => {
     return <View></View>;
   };
 
-  const renderRightButton = () => {
-    return <TouchableOpacity></TouchableOpacity>;
+  const renderRightButton = (): FunctionComponent => {
+    return (
+      <TouchableOpacity>
+        <Icon name="edit" />
+      </TouchableOpacity>
+    );
   };
 
   const renderListItem = () => {
@@ -36,7 +41,7 @@ const Home = () => {
 
   return (
     <View style={Layout.fill}>
-      <AppHeader title={title} />
+      <AppHeader title={title} rightComponent={renderRightButton} />
       <View style={Layout.fill}>
         {data.length > 0 ? renderListItem() : renderEmpty()}
       </View>
