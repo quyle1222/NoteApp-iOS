@@ -1,17 +1,35 @@
 import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
+import { NoteState } from '@/store/notes';
 import { CONST } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
+
 const Home = () => {
   const title = 'Home';
   const { Layout, Fonts } = useTheme();
   const [data, setData] = useState([]);
   const { navigate } = useNavigation();
-  const renderItem = () => {
-    return <View></View>;
+  const store = useSelector(state => state);
+
+  const listData = useSelector(
+    (state: { notes: NoteState }) => state.notes.data,
+  );
+
+  console.log('store', store);
+  console.log('data', listData);
+
+  const renderItem = (item: string) => {
+    return (
+      <View>
+        <Text numberOfLines={1} style={{ color: 'white' }}>
+          {item}
+        </Text>
+      </View>
+    );
   };
 
   const renderRightButton = (): JSX.Element => {
@@ -22,8 +40,8 @@ const Home = () => {
     return (
       <FlatList
         keyExtractor={(item, index) => `${index}`}
-        data={data}
-        renderItem={() => renderItem()}
+        data={listData}
+        renderItem={({ item }) => renderItem(item)}
       />
     );
   };
@@ -48,7 +66,7 @@ const Home = () => {
         onTapRight={onTapCreateNew}
       />
       <View style={Layout.fill}>
-        {data.length > 0 ? renderListItem() : renderEmpty()}
+        {listData?.length > 0 ? renderListItem() : renderEmpty()}
       </View>
     </View>
   );
