@@ -5,7 +5,7 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import { Home, Startup } from '../screens';
+import { Home, NewNote, Startup } from '../screens';
 import { useTheme } from '../hooks';
 import MainNavigator from './Main';
 import { useFlipper } from '@react-navigation/devtools';
@@ -31,6 +31,7 @@ const ApplicationNavigator = () => {
           <Stack.Screen name={CONST.STARTUP} component={Startup} />
           <Stack.Screen name={CONST.MAIN} component={MainNavigator} />
           <Stack.Screen name={CONST.HOME} component={Home} />
+          <Stack.Screen name={CONST.NEW_NOTE} component={NewNote} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

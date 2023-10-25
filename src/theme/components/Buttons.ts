@@ -6,7 +6,7 @@ export default function <C>({ Colors, Gutters, Layout }: CommonParams<C>) {
     ...Layout.center,
     ...Gutters.regularHPadding,
     height: 40,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
   };
   const rounded = {
     ...base,

@@ -1,37 +1,58 @@
 import { useTheme } from '@/hooks';
-import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, ViewProps } from 'react-native';
+import React from 'react';
+import { ImageStyle } from 'react-native';
+import { TextStyle } from 'react-native';
+import { StyleProp } from 'react-native';
+import {
+  ColorValue,
+  GestureResponderEvent,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 const AppHeader = ({
   title,
-  leftComponent = null,
-  rightComponent = null,
-  ...props
+  leftComponent = undefined,
+  rightComponent = undefined,
+  onTapLeft,
+  onTapRight,
 }: {
   title: String;
-  leftComponent: FunctionComponent | null;
-  rightComponent: FunctionComponent | null;
-  props: ViewProps | null;
+  leftComponent: JSX.Element | undefined;
+  rightComponent: JSX.Element | undefined;
+  onTapLeft: ((event: GestureResponderEvent) => void) | undefined;
+  onTapRight: ((event: GestureResponderEvent) => void) | undefined;
 }) => {
-  const { Fonts, Layout, MetricsSizes } = useTheme();
+  const { Common, Fonts, Layout, Colors } = useTheme();
 
   return (
-    <View style={[Layout.fill, style.containerHeight]} {...props}>
-      {leftComponent}
+    <View style={[style.containerHeight(Colors.white)]}>
+      <TouchableOpacity style={[Common.button.base]} onPress={onTapLeft}>
+        {leftComponent}
+      </TouchableOpacity>
       {title && (
-        <Text style={[Layout.fill, Fonts.textCenter, Fonts.textPrimary]}>
-          {title}
-        </Text>
+        <View style={[Layout.fill, style.textContainer]}>
+          <Text style={[Fonts.textCenter, Fonts.textPrimary]}>{title}</Text>
+        </View>
       )}
-      {rightComponent}
+      <TouchableOpacity style={[Common.button.base]} onPress={onTapRight}>
+        {rightComponent}
+      </TouchableOpacity>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  containerHeight: {
+const style = StyleSheet.create<ViewStyle | TextStyle | ImageStyle | any>({
+  containerHeight: (color: ColorValue): StyleProp<ViewStyle> => ({
     flexDirection: 'row',
-    height: 80,
+    height: 40,
+    backgroundColor: color,
+  }),
+  textContainer: {
+    justifyContent: 'center',
   },
 });
 

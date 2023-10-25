@@ -1,27 +1,24 @@
-import AppHeader from '@/components/AppHeader/AppHeader';
+import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
-import React, { useState, Component, FunctionComponent } from 'react';
-import { FlatList, View, Text, TouchableOpacity } from 'react-native';
+import { CONST } from '@/utils';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
 const Home = () => {
   const title = 'Home';
   const { Layout, Fonts } = useTheme();
   const [data, setData] = useState([]);
-
+  const { navigate } = useNavigation();
   const renderItem = () => {
     return <View></View>;
   };
 
-  const renderRightButton = (): FunctionComponent => {
-    return (
-      <TouchableOpacity>
-        <Icon name="edit" />
-      </TouchableOpacity>
-    );
+  const renderRightButton = (): JSX.Element => {
+    return <Icon name={'edit'} />;
   };
 
-  const renderListItem = () => {
+  const renderListItem = (): JSX.Element => {
     return (
       <FlatList
         keyExtractor={(item, index) => `${index}`}
@@ -31,7 +28,7 @@ const Home = () => {
     );
   };
 
-  const renderEmpty = () => {
+  const renderEmpty = (): JSX.Element => {
     return (
       <View>
         <Text style={[Fonts.textCenter, Fonts.textLarge]}>Empty</Text>
@@ -39,9 +36,17 @@ const Home = () => {
     );
   };
 
+  const onTapCreateNew = () => {
+    navigate(CONST.NEW_NOTE);
+  };
+
   return (
     <View style={Layout.fill}>
-      <AppHeader title={title} rightComponent={renderRightButton} />
+      <AppHeader
+        title={title}
+        rightComponent={renderRightButton()}
+        onTapRight={onTapCreateNew}
+      />
       <View style={Layout.fill}>
         {data.length > 0 ? renderListItem() : renderEmpty()}
       </View>
