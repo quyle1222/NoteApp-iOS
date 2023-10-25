@@ -8,6 +8,7 @@ import {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.API_URL,
+  timeout: 60000,
 });
 
 const baseQueryWithInterceptor: BaseQueryFn<
