@@ -11,6 +11,9 @@ import MainNavigator from './Main';
 import { useFlipper } from '@react-navigation/devtools';
 import { ApplicationStackParamList } from '../../@types/navigation';
 import { CONST } from '@/utils';
+import { useSelector } from 'react-redux';
+import { AlertState } from '@/store/alert';
+import { AlertMessage } from '@/components';
 
 const Stack = createStackNavigator<ApplicationStackParamList>();
 
@@ -18,6 +21,9 @@ const Stack = createStackNavigator<ApplicationStackParamList>();
 const ApplicationNavigator = () => {
   const { Layout, darkMode, NavigationTheme } = useTheme();
   const { colors } = NavigationTheme;
+  const { isShowAlert, isShowLoading } = useSelector(
+    (state: { alert: AlertState }) => state.alert,
+  );
 
   const navigationRef = useNavigationContainerRef();
 
@@ -34,6 +40,7 @@ const ApplicationNavigator = () => {
           <Stack.Screen name={CONST.NEW_NOTE} component={NewNote} />
         </Stack.Navigator>
       </NavigationContainer>
+      {isShowAlert && <AlertMessage />}
     </SafeAreaView>
   );
 };

@@ -7,6 +7,7 @@ import { StyleSheet } from 'react-native';
 import buttonStyles from './components/Buttons';
 import { CommonParams } from '../../@types/theme';
 import appHeaderStyles from './components/AppHeaders';
+import alertMessage from './components/AlertMessage';
 
 export default function <C>({ Colors, ...args }: CommonParams<C>) {
   return {
@@ -27,5 +28,6 @@ export default function <C>({ Colors, ...args }: CommonParams<C>) {
         paddingStart: 20,
       },
     }),
+    alertMessage: alertMessage({ Colors, ...args }),
   };
 }

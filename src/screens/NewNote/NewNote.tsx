@@ -15,6 +15,7 @@ import {
   RichToolbar,
 } from 'react-native-pell-rich-editor';
 import { addNote } from '@/store/notes';
+import { showAlert, hiddenAlert } from '@/store/alert';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
@@ -28,8 +29,16 @@ const NewNote = (): JSX.Element => {
   let text = '';
 
   const onSave = () => {
-    dispatch(addNote({ note: text }));
-    goBack();
+    let rawText = text.trim();
+    if (rawText) {
+      dispatch(addNote({ note: text }));
+      goBack();
+    } else {
+      dispatch(showAlert({ message: "Don't have note" }));
+      setTimeout(() => {
+        dispatch(hiddenAlert());
+      }, 2000);
+    }
   };
 
   const renderLeftComponent = (): JSX.Element => {

@@ -3,7 +3,7 @@ import { useTheme } from '@/hooks';
 import { NoteState } from '@/store/notes';
 import { CONST } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
@@ -11,21 +11,16 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const title = 'Home';
   const { Layout, Fonts } = useTheme();
-  const [data, setData] = useState([]);
   const { navigate } = useNavigation();
-  const store = useSelector(state => state);
 
   const listData = useSelector(
     (state: { notes: NoteState }) => state.notes.data,
   );
 
-  console.log('store', store);
-  console.log('data', listData);
-
   const renderItem = (item: String) => {
     return (
       <View>
-        <Text numberOfLines={1} style={{ color: 'white' }}>
+        <Text numberOfLines={1} style={Fonts.textSmall}>
           {item}
         </Text>
       </View>
@@ -33,7 +28,7 @@ const Home = () => {
   };
 
   const renderRightButton = (): JSX.Element => {
-    return <Icon name={'edit'} />;
+    return <Icon size={20} name={'edit'} />;
   };
 
   const renderListItem = (): JSX.Element => {
@@ -48,7 +43,7 @@ const Home = () => {
 
   const renderEmpty = (): JSX.Element => {
     return (
-      <View style={[Layout.fill,Layout.center]}>
+      <View style={[Layout.fill, Layout.center]}>
         <Text style={[Fonts.textCenter, Fonts.textLarge]}>Empty</Text>
       </View>
     );
