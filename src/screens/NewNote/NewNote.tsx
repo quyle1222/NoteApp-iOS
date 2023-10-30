@@ -5,6 +5,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  ColorValue,
 } from 'react-native';
 import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
@@ -16,9 +17,10 @@ import {
 import { addNote } from '@/store/notes';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+
 const NewNote = (): JSX.Element => {
   const richText = useRef();
-  const { Layout } = useTheme();
+  const { Layout, Fonts } = useTheme();
   const dispatch = useDispatch();
   const { goBack } = useNavigation();
 
@@ -30,14 +32,18 @@ const NewNote = (): JSX.Element => {
     goBack();
   };
 
-  const handleHead = ({ tintColor }) => (
+  const renderLeftComponent = (): JSX.Element => {
+    return <Text style={Fonts.textTiny}>Back</Text>;
+  };
+
+  const handleHead = ({ tintColor }: { tintColor: ColorValue }) => (
     <View style={{ height: '100%', justifyContent: 'center' }}>
       <Text style={{ color: tintColor }}>H1</Text>
     </View>
   );
 
   const renderRight = (): JSX.Element => {
-    return <Text>Save</Text>;
+    return <Text style={Fonts.textTiny}>Save</Text>;
   };
 
   return (
@@ -45,7 +51,9 @@ const NewNote = (): JSX.Element => {
       <SafeAreaView style={Layout.fill}>
         <AppHeader
           title={title}
+          leftComponent={renderLeftComponent()}
           rightComponent={renderRight()}
+          onTapLeft={goBack}
           onTapRight={onSave}
         />
         <View>

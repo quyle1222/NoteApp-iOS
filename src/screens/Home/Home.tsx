@@ -22,7 +22,7 @@ const Home = () => {
   console.log('store', store);
   console.log('data', listData);
 
-  const renderItem = (item: string) => {
+  const renderItem = (item: String) => {
     return (
       <View>
         <Text numberOfLines={1} style={{ color: 'white' }}>
@@ -48,7 +48,7 @@ const Home = () => {
 
   const renderEmpty = (): JSX.Element => {
     return (
-      <View>
+      <View style={[Layout.fill,Layout.center]}>
         <Text style={[Fonts.textCenter, Fonts.textLarge]}>Empty</Text>
       </View>
     );

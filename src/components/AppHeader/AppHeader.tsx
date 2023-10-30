@@ -1,5 +1,5 @@
 import { useTheme } from '@/hooks';
-import React from 'react';
+import React, { FC } from 'react';
 import { ImageStyle } from 'react-native';
 import { TextStyle } from 'react-native';
 import { StyleProp } from 'react-native';
@@ -13,18 +13,20 @@ import {
   ViewStyle,
 } from 'react-native';
 
-const AppHeader = ({
+interface AppHeaderProps {
+  title: string;
+  leftComponent?: JSX.Element;
+  rightComponent?: JSX.Element;
+  onTapLeft?(event: GestureResponderEvent): void;
+  onTapRight?(event: GestureResponderEvent): void;
+}
+
+const AppHeader: FC<AppHeaderProps> = ({
   title,
-  leftComponent = undefined,
-  rightComponent = undefined,
+  leftComponent,
+  rightComponent,
   onTapLeft,
   onTapRight,
-}: {
-  title: String;
-  leftComponent: JSX.Element | undefined;
-  rightComponent: JSX.Element | undefined;
-  onTapLeft: ((event: GestureResponderEvent) => void) | undefined;
-  onTapRight: ((event: GestureResponderEvent) => void) | undefined;
 }) => {
   const { Common, Fonts, Layout, Colors } = useTheme();
 
