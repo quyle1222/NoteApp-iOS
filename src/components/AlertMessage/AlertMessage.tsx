@@ -1,35 +1,35 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '../../hooks';
-import { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { AlertState, hiddenAlert } from '@/store/alert';
+import React, { FC } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from '../../hooks';
 
 const AlertMessage: FC = () => {
   const message = useSelector(
     (state: { alert: AlertState }) => state.alert.message,
   );
   const dispatch = useDispatch();
-  const { Layout, Fonts, Common } = useTheme();
+  const { Fonts, Common } = useTheme();
 
-  const renderMessage = () => {
+  const renderMessage = (): JSX.Element => {
+    return <Text style={Fonts.textSmall}>{message}</Text>;
+  };
+
+  const renderButton = (): JSX.Element => {
     return (
-      <View style={Common.alertMessage.view}>
-        <Text style={Fonts.textSmall}>{message}</Text>
-
-        <View style={Common.alertMessage.footer}>
-          <TouchableOpacity
-            onPress={onTapCancel}
-            style={[Common.alertMessage.buttonLeft]}
-          >
-            <Text style={Fonts.textSmall}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={onTapConfirmed}
-            style={Common.alertMessage.buttonRight}
-          >
-            <Text style={Fonts.textSmall}>OK</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={Common.alertMessage.footer}>
+        <TouchableOpacity
+          onPress={onTapCancel}
+          style={[Common.alertMessage.buttonLeft]}
+        >
+          <Text style={Fonts.textSmall}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onTapConfirmed}
+          style={Common.alertMessage.buttonRight}
+        >
+          <Text style={Fonts.textSmall}>OK</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -42,7 +42,14 @@ const AlertMessage: FC = () => {
     dispatch(hiddenAlert());
   };
 
-  return <View style={Common.alertMessage.main}>{renderMessage()}</View>;
+  return (
+    <View style={Common.alertMessage.main}>
+      <View style={Common.alertMessage.view}>
+        {renderMessage()}
+        {renderButton()}
+      </View>
+    </View>
+  );
 };
 
 export default AlertMessage;

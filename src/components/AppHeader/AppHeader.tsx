@@ -15,8 +15,8 @@ import {
 
 interface AppHeaderProps {
   title: string;
-  leftComponent?: JSX.Element;
-  rightComponent?: JSX.Element;
+  leftComponent?: JSX.Element | undefined;
+  rightComponent?: JSX.Element | undefined;
   onTapLeft?(event: GestureResponderEvent): void;
   onTapRight?(event: GestureResponderEvent): void;
 }
@@ -45,6 +45,13 @@ const AppHeader: FC<AppHeaderProps> = ({
       </TouchableOpacity>
     </View>
   );
+};
+
+AppHeader.defaultProps = {
+  leftComponent: undefined,
+  rightComponent: undefined,
+  onTapLeft: undefined,
+  onTapRight: undefined,
 };
 
 const style = StyleSheet.create<ViewStyle | TextStyle | ImageStyle | any>({
