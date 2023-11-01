@@ -17,7 +17,7 @@ import {
 } from 'react-native-pell-rich-editor';
 
 import { addNote } from '@/store/notes';
-import { showAlert, hiddenAlert } from '@/store/alert';
+import { showAlert } from '@/store/alert';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
@@ -45,7 +45,7 @@ const NewNote = (): JSX.Element => {
   };
 
   const handleHead = ({ tintColor }: { tintColor: ColorValue }) => (
-    <View style={{ height: '100%', justifyContent: 'center' }}>
+    <View style={[Layout.fullHeight, Layout.center]}>
       <Text style={{ color: tintColor }}>H1</Text>
     </View>
   );
@@ -72,7 +72,7 @@ const NewNote = (): JSX.Element => {
           />
         </View>
         <RichEditor
-          style={{ flex: 1 }}
+          style={Layout.fill}
           ref={ref => (richText.current = ref)}
           onChange={descriptionText => {
             text = descriptionText;
