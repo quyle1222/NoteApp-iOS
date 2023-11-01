@@ -9,18 +9,20 @@ import {
 } from 'react-native';
 import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
+
 import {
   actions,
   RichEditor,
   RichToolbar,
 } from 'react-native-pell-rich-editor';
+
 import { addNote } from '@/store/notes';
 import { showAlert, hiddenAlert } from '@/store/alert';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 const NewNote = (): JSX.Element => {
-  const richText = useRef();
+  const richText = useRef<RichEditor | null>();
   const { Layout, Fonts } = useTheme();
   const dispatch = useDispatch();
   const { goBack } = useNavigation();
@@ -35,9 +37,6 @@ const NewNote = (): JSX.Element => {
       goBack();
     } else {
       dispatch(showAlert({ message: "Don't have note" }));
-      setTimeout(() => {
-        dispatch(hiddenAlert());
-      }, 2000);
     }
   };
 
@@ -74,7 +73,7 @@ const NewNote = (): JSX.Element => {
         </View>
         <RichEditor
           style={{ flex: 1 }}
-          ref={richText}
+          ref={ref => (richText.current = ref)}
           onChange={descriptionText => {
             text = descriptionText;
           }}

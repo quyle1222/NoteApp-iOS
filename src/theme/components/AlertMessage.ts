@@ -2,6 +2,12 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { CommonParams } from '../../../@types/theme';
 const { width, height } = Dimensions.get('window');
 export default function <C>({ Colors, Layout }: CommonParams<C>) {
+  const button = {
+    width: width * 0.35,
+    height: width * 0.1,
+    backgroundColor: Colors.white,
+    ...Layout.center,
+  };
   return StyleSheet.create({
     main: {
       position: 'absolute',
@@ -18,6 +24,23 @@ export default function <C>({ Colors, Layout }: CommonParams<C>) {
       backgroundColor: 'red',
       borderRadius: 12,
       ...Layout.center,
+    },
+    footer: {
+      marginTop: 'auto',
+      ...Layout.fullWidth,
+      ...Layout.row,
+    },
+    buttonRight: {
+      marginLeft: 'auto',
+      marginRight: 0,
+      borderBottomRightRadius: 12,
+      ...button,
+    },
+    buttonLeft: {
+      marginLeft: 0,
+      marginRight: 'auto',
+      borderBottomLeftRadius: 12,
+      ...button,
     },
   });
 }
