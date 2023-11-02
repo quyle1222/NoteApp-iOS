@@ -9,6 +9,7 @@ const AlertMessage: FC = () => {
     (state: { alert: AlertState }) => state.alert.message,
   );
   const dispatch = useDispatch();
+
   const { Fonts, Common } = useTheme();
 
   const renderMessage = (): JSX.Element => {

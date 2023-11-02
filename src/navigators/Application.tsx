@@ -21,7 +21,7 @@ const Stack = createStackNavigator<ApplicationStackParamList>();
 const ApplicationNavigator = () => {
   const { Layout, darkMode, NavigationTheme } = useTheme();
   const { colors } = NavigationTheme;
-  const { isShowAlert, isShowLoading } = useSelector(
+  const { isShowAlert } = useSelector(
     (state: { alert: AlertState }) => state.alert,
   );
 

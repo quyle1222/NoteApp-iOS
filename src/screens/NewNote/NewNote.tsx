@@ -36,7 +36,8 @@ const NewNote = (): JSX.Element => {
       dispatch(addNote({ note: text }));
       goBack();
     } else {
-      dispatch(showAlert({ message: "Don't have note" }));
+      // eslint-disable-next-line prettier/prettier
+      dispatch(showAlert({ message: 'Don\'t have note' }));
     }
   };
 
