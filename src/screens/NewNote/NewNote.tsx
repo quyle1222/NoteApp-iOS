@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
-
 import {
   actions,
   RichEditor,

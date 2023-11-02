@@ -15,8 +15,8 @@ import {
 
 interface AppHeaderProps {
   title: string;
-  leftComponent?: JSX.Element | undefined;
-  rightComponent?: JSX.Element | undefined;
+  leftComponent?: JSX.Element;
+  rightComponent?: JSX.Element;
   onTapLeft?(event: GestureResponderEvent): void;
   onTapRight?(event: GestureResponderEvent): void;
 }
