@@ -3,15 +3,21 @@ import { useTheme } from '@/hooks';
 import { NoteState } from '@/store/notes';
 import { CONST } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
+import {
+  ApplicationScreenProps,
+  ApplicationStackParamList,
+} from 'types/navigation';
 
 const Home = () => {
   const title = 'Home';
   const { Layout, Fonts } = useTheme();
-  const { navigate } = useNavigation();
+  const { navigate } =
+    useNavigation<StackNavigationProp<ApplicationStackParamList>>();
 
   const listData = useSelector(
     (state: { notes: NoteState }) => state.notes.data,
