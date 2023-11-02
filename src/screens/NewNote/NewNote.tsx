@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ColorValue,
+  TextInput,
 } from 'react-native';
 import { AppHeader } from '@/components';
 import { useTheme } from '@/hooks';
@@ -14,13 +15,14 @@ import {
   RichEditor,
   RichToolbar,
 } from 'react-native-pell-rich-editor';
-
 import { addNote } from '@/store/notes';
 import { showAlert } from '@/store/alert';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 const NewNote = (): JSX.Element => {
+  const { t } = useTranslation(['common']);
   const richText = useRef<RichEditor | null>();
   const { Layout, Fonts } = useTheme();
   const dispatch = useDispatch();
@@ -36,7 +38,8 @@ const NewNote = (): JSX.Element => {
       goBack();
     } else {
       // eslint-disable-next-line prettier/prettier
-      dispatch(showAlert({ message: 'Don\'t have note' }));
+      let message: string = t('alert.note_is_empty');
+      dispatch(showAlert({ message: message }));
     }
   };
 
@@ -64,6 +67,9 @@ const NewNote = (): JSX.Element => {
           onTapLeft={goBack}
           onTapRight={onSave}
         />
+        <View>
+          <TextInput />
+        </View>
         <View>
           <RichToolbar
             editor={richText}

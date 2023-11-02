@@ -1,6 +1,10 @@
 {
-    "appName": {
-      "full": "React Native NoteApp",
-      "initials": "RNB"
-    }
+  "appName": {
+    "full": "React Native NoteApp",
+    "initials": "RNB"
+  },
+
+  "alert": {
+    "note_is_empty": "Vui lòng nhập ghi chú"
   }
+}

@@ -10,10 +10,14 @@ const AlertMessage: FC = () => {
   );
   const dispatch = useDispatch();
 
-  const { Fonts, Common } = useTheme();
+  const { Layout, Fonts, Common } = useTheme();
 
   const renderMessage = (): JSX.Element => {
-    return <Text style={Fonts.textSmall}>{message}</Text>;
+    return (
+      <View style={[Layout.fill, Layout.center]}>
+        <Text style={Fonts.textSmall}>{message}</Text>
+      </View>
+    );
   };
 
   const renderButton = (): JSX.Element => {

@@ -3,29 +3,34 @@ import { CommonParams } from '../../../@types/theme';
 const { width, height } = Dimensions.get('window');
 export default function <C>({ Colors, Layout }: CommonParams<C>) {
   const button = {
-    width: width * 0.35,
+    // width: width * 0.35,
     height: width * 0.1,
     backgroundColor: Colors.white,
+    ...Layout.fill,
     ...Layout.center,
   };
   return StyleSheet.create({
     main: {
       position: 'absolute',
-      backgroundColor: 'black',
-      opacity: 0.6,
       ...Layout.fullSize,
       ...Layout.center,
       zIndex: 999,
     },
     view: {
+      backgroundColor: '#F5F5F5',
+      borderWidth: 1,
       width: width * 0.7,
       minHeight: height * 0.2,
       maxHeight: height * 0.4,
-      backgroundColor: 'red',
       borderRadius: 12,
       ...Layout.center,
     },
     footer: {
+      overflow: 'hidden',
+      borderBottomRightRadius: 12,
+      borderBottomLeftRadius: 12,
+      backgroundColor: '#F5F5F5',
+      borderTopWidth: 1,
       marginTop: 'auto',
       ...Layout.fullWidth,
       ...Layout.row,
@@ -33,13 +38,12 @@ export default function <C>({ Colors, Layout }: CommonParams<C>) {
     buttonRight: {
       marginLeft: 'auto',
       marginRight: 0,
-      borderBottomRightRadius: 12,
       ...button,
     },
     buttonLeft: {
+      borderRightWidth: 1,
       marginLeft: 0,
       marginRight: 'auto',
-      borderBottomLeftRadius: 12,
       ...button,
     },
   });

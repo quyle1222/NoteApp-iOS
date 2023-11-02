@@ -2,5 +2,8 @@
   "appName": {
     "full": "React Native NoteApp",
     "initials": "RNB"
+  },
+  "alert": {
+    "note_is_empty": "Please input note"
   }
 }
