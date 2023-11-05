@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next';
 const NewNote = (): JSX.Element => {
   const { t } = useTranslation(['common']);
   const richText = useRef<RichEditor | null>();
-  const { Layout, Fonts } = useTheme();
+  const { Layout, Fonts, Gutters } = useTheme();
   const dispatch = useDispatch();
   const { goBack } = useNavigation();
 
@@ -67,9 +67,9 @@ const NewNote = (): JSX.Element => {
           onTapLeft={goBack}
           onTapRight={onSave}
         />
-        <View>
-          <TextInput />
-        </View>
+        {/* <View style={{ height: 40, backgroundColor: 'white' }}>
+          <TextInput style={[Layout.fill, Gutters.smallHPadding]} />
+        </View> */}
         <View>
           <RichToolbar
             editor={richText}
